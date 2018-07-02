@@ -5,6 +5,7 @@ var Promise = require('bluebird');
  * @param {Object}              [options={}]
  * @param {Object|String}         [options.select]
  * @param {Object|String}         [options.sort]
+ * @param {Object|}               [options.collation][
  * @param {Array|Object|String}   [options.populate]
  * @param {Boolean}               [options.lean=false]
  * @param {Boolean}               [options.leanWithId=true]
@@ -21,6 +22,7 @@ function paginate(query, options, callback) {
 
     var select     = options.select;
     var sort       = options.sort;
+    var collation  = option.collation;
     var populate   = options.populate;
     var lean       = options.lean || false;
     var leanWithId = options.hasOwnProperty('leanWithId') ? options.leanWithId : true;
@@ -49,6 +51,7 @@ function paginate(query, options, callback) {
         var query = this.find(query)
                         .select(select)
                         .sort(sort)
+                        .collation(collation)
                         .skip(skip)
                         .limit(limit)
                         .lean(lean);
